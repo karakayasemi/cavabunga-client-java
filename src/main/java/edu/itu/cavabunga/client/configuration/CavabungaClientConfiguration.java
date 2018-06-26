@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class ClientConfiguration {
+public class CavabungaClientConfiguration {
     private Environment env;
 
     private String cavabungaServerUrl;
@@ -16,7 +16,7 @@ public class ClientConfiguration {
     private String cavabungaServerVersion;
 
     @Autowired
-    public ClientConfiguration(Environment env){
+    public CavabungaClientConfiguration(Environment env){
         this.env = env;
         cavabungaServerUrl = this.env.getProperty("cavabunga.server.url");
         cavabungaServerPort = this.env.getProperty("cavabunga.server.port");
