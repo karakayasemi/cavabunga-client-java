@@ -32,13 +32,13 @@ public class PropertyRestService {
     public String sendPropertyToServer(Property property,
                                         RequestMethod requestMethod,
                                         String apiUri){
-        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod,
                 this.jsonObjectMapper.mapPropertyToJson(property));
     }
 
     public List<Property> recievePropertyFromServer(String apiUri, RequestMethod requestMethod){
-        return this.jsonObjectMapper.mapFromJsonToPropertyResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.jsonObjectMapper.mapFromJsonToPropertyResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod, ""));
     }
 }

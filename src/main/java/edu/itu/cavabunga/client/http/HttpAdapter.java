@@ -38,6 +38,9 @@ public class HttpAdapter {
             }
             in.close();
             connection.disconnect();
+            if(connection.getResponseCode() != 200){
+                throw new ClientException("Cavabunga server return with http code: " + connection.getResponseCode());
+            }
             return result.toString();
         }catch (Exception e){
             throw new ClientException("There is a problem about http connection: " + e.getMessage());

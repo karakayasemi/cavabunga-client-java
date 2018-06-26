@@ -34,7 +34,7 @@ public class ParticipantRestService {
     public String sendParticipantToServer(Participant participant,
                                         RequestMethod requestMethod,
                                         String apiUri){
-        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":"+ this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod,
                 this.jsonObjectMapper.mapParticipantToJson(participant));
     }

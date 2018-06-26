@@ -31,14 +31,14 @@ public class ParameterRestService {
     public String sendParameterToServer(Parameter parameter,
                                         RequestMethod requestMethod,
                                         String apiUri){
-        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod,
                 this.jsonObjectMapper.mapParameterToJson(parameter));
     }
 
     public List<Parameter> recieveParameterFromServer(String apiUri,
                                                       RequestMethod requestMethod){
-        return this.jsonObjectMapper.mapFromJsonToParameterResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.jsonObjectMapper.mapFromJsonToParameterResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod, ""));
     }
 }

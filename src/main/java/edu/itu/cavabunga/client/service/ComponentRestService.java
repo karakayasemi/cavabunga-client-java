@@ -32,13 +32,13 @@ public class ComponentRestService {
     public String sendComponentToServer(edu.itu.cavabunga.lib.entity.Component component,
                                       RequestMethod requestMethod,
                                       String apiUri){
-        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod,
                 this.jsonObjectMapper.mapComponentToJson(component));
     }
 
     public List<edu.itu.cavabunga.lib.entity.Component> recieveComponentFromServer(String apiUri, RequestMethod requestMethod){
-        return this.jsonObjectMapper.mapFromJsonToComponentResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+        return this.jsonObjectMapper.mapFromJsonToComponentResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod, ""));
     }
 }
