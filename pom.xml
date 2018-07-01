@@ -80,13 +80,8 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 			<!-- JaCoCo configuration -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
