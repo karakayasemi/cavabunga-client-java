@@ -1,4 +1,4 @@
-package edu.itu.cavabunga.client.exception;
+package tr.edu.itu.cavabunga.client.exception;
 
 public class JsonParseException extends RuntimeException {
     public JsonParseException(){}

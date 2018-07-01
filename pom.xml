@@ -62,13 +62,24 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>tr.edu.itu</groupId>
+			<groupId>tr.edu.itu.cavabunga</groupId>
 			<artifactId>cavabunga-lib</artifactId>
-			<version>1.0.1</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/cavabunga-lib.jar</systemPath>
+			<version>1.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<id>cavabunga</id>
+			<name>cavabunga-lib</name>
+			<url>http://maven.test.itu.edu.tr</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>

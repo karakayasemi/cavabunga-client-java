@@ -1,18 +1,16 @@
-package edu.itu.cavabunga.client.http;
+package tr.edu.itu.cavabunga.client.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.itu.cavabunga.client.exception.ClientException;
-import edu.itu.cavabunga.client.exception.JsonParseException;
-import edu.itu.cavabunga.lib.entity.Parameter;
-import edu.itu.cavabunga.lib.entity.Participant;
-import edu.itu.cavabunga.lib.entity.Property;
-import edu.itu.cavabunga.lib.http.*;
+import tr.edu.itu.cavabunga.client.exception.JsonParseException;
+import tr.edu.itu.cavabunga.lib.entity.Parameter;
+import tr.edu.itu.cavabunga.lib.entity.Participant;
+import tr.edu.itu.cavabunga.lib.entity.Property;
+import tr.edu.itu.cavabunga.lib.http.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.PropertyResourceBundle;
 
 @Data
 @Component
@@ -32,7 +30,7 @@ public class JsonObjectMapper {
         }
     }
 
-    public String mapComponentToJson(edu.itu.cavabunga.lib.entity.Component component){
+    public String mapComponentToJson(tr.edu.itu.cavabunga.lib.entity.Component component){
         try {
             return mapper.writeValueAsString(component);
         }catch (Exception e){
@@ -73,15 +71,15 @@ public class JsonObjectMapper {
         }
     }
 
-    public edu.itu.cavabunga.lib.entity.Component mapFromJsonToComponent(String jsonInput){
+    public tr.edu.itu.cavabunga.lib.entity.Component mapFromJsonToComponent(String jsonInput){
         try {
-            return mapper.readValue(jsonInput, edu.itu.cavabunga.lib.entity.Component.class);
+            return mapper.readValue(jsonInput, tr.edu.itu.cavabunga.lib.entity.Component.class);
         }catch (Exception e){
             throw new JsonParseException("There is something wrong in toComponent mapping: " + e.getMessage());
         }
     }
 
-    public List<edu.itu.cavabunga.lib.entity.Component> mapFromJsonToComponentResponseList(String jsonInput){
+    public List<tr.edu.itu.cavabunga.lib.entity.Component> mapFromJsonToComponentResponseList(String jsonInput){
         try{
             return mapper.readValue(jsonInput,ComponentResponse.class).getData();
         }catch (Exception e){

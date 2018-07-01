@@ -1,14 +1,13 @@
-package edu.itu.cavabunga.client.service;
+package tr.edu.itu.cavabunga.client.service;
 
-import edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
-import edu.itu.cavabunga.client.exception.ClientException;
-import edu.itu.cavabunga.client.http.HttpAdapter;
-import edu.itu.cavabunga.client.http.JsonObjectMapper;
+import tr.edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
+import tr.edu.itu.cavabunga.client.http.HttpAdapter;
+import tr.edu.itu.cavabunga.client.http.JsonObjectMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMethod;
+import tr.edu.itu.cavabunga.lib.entity.Component;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class ComponentRestService {
         this.jsonObjectMapper = jsonObjectMapper;
     }
 
-    public String sendComponentToServer(edu.itu.cavabunga.lib.entity.Component component,
+    public String sendComponentToServer(tr.edu.itu.cavabunga.lib.entity.Component component,
                                       RequestMethod requestMethod,
                                       String apiUri){
         return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
@@ -37,7 +36,7 @@ public class ComponentRestService {
                 this.jsonObjectMapper.mapComponentToJson(component));
     }
 
-    public List<edu.itu.cavabunga.lib.entity.Component> recieveComponentFromServer(String apiUri, RequestMethod requestMethod){
+    public List<Component> recieveComponentFromServer(String apiUri, RequestMethod requestMethod){
         return this.jsonObjectMapper.mapFromJsonToComponentResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
                 requestMethod, ""));
     }

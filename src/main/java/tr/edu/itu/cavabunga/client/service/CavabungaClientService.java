@@ -1,9 +1,9 @@
-package edu.itu.cavabunga.client.service;
+package tr.edu.itu.cavabunga.client.service;
 
-import edu.itu.cavabunga.client.exception.ClientException;
-import edu.itu.cavabunga.lib.entity.Component;
-import edu.itu.cavabunga.lib.entity.Participant;
-import edu.itu.cavabunga.lib.entity.component.Calendar;
+import tr.edu.itu.cavabunga.client.exception.ClientException;
+import tr.edu.itu.cavabunga.lib.entity.Component;
+import tr.edu.itu.cavabunga.lib.entity.Participant;
+import tr.edu.itu.cavabunga.lib.entity.component.Calendar;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

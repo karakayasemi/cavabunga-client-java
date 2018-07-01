@@ -1,4 +1,4 @@
-package edu.itu.cavabunga.client.configuration;
+package tr.edu.itu.cavabunga.client.configuration;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

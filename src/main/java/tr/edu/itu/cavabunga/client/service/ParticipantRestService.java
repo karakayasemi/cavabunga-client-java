@@ -1,14 +1,11 @@
-package edu.itu.cavabunga.client.service;
+package tr.edu.itu.cavabunga.client.service;
 
-import edu.itu.cavabunga.client.CavabungaClient;
-import edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
-import edu.itu.cavabunga.client.http.HttpAdapter;
-import edu.itu.cavabunga.client.http.JsonObjectMapper;
-import edu.itu.cavabunga.lib.entity.Component;
-import edu.itu.cavabunga.lib.entity.Participant;
+import tr.edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
+import tr.edu.itu.cavabunga.client.http.HttpAdapter;
+import tr.edu.itu.cavabunga.client.http.JsonObjectMapper;
+import tr.edu.itu.cavabunga.lib.entity.Participant;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMethod;
 

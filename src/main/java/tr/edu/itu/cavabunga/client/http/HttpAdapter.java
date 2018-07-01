@@ -1,6 +1,6 @@
-package edu.itu.cavabunga.client.http;
+package tr.edu.itu.cavabunga.client.http;
 
-import edu.itu.cavabunga.client.exception.ClientException;
+import tr.edu.itu.cavabunga.client.exception.ClientException;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
