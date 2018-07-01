@@ -33,7 +33,7 @@ public class CavabungaClientService {
 
     public List<Participant> retrieveParticipant(String userName){
         try {
-            return participantRestService.recieveParticipantFromServer("participant/" + userName, RequestMethod.GET);
+            return participantRestService.getParticipantFromServer("participant/" + userName);
         }catch (Exception e){
             throw new ClientException("Couldnt recieve participant with username: " + userName + " ,message:" + e.getMessage());
         }
@@ -41,7 +41,7 @@ public class CavabungaClientService {
 
     public List<Component> retrieveComponentById(Long id){
         try {
-            return componentRestService.recieveComponentFromServer("component/" + id.toString(), RequestMethod.GET);
+            return componentRestService.getComponentFromServer("component/" + id.toString());
         }catch (Exception e){
             throw new ClientException("Couldnt recieve component with id of " + id.toString() + " ,message:" + e.getMessage());
         }
@@ -49,7 +49,7 @@ public class CavabungaClientService {
 
     public List<Component> retrieveComponentsByOwner(String userName){
         try {
-            return componentRestService.recieveComponentFromServer("participant/" + userName + "/components", RequestMethod.GET);
+            return componentRestService.getComponentFromServer("participant/" + userName + "/components");
         }catch (Exception e){
             throw new ClientException("Coulnd recieve participants components username: " + userName + " ,message:" + e.getMessage());
         }
@@ -58,7 +58,7 @@ public class CavabungaClientService {
     public List<Component> retrieveCalendarsByOwner(String userName){
         List<Component> calendars = new ArrayList<>();
         try {
-            for (Component c : componentRestService.recieveComponentFromServer("participant/" + userName + "/components", RequestMethod.GET)){
+            for (Component c : componentRestService.getComponentFromServer("participant/" + userName + "/components")){
                 if(c instanceof Calendar){
                     calendars.add(c);
                 }

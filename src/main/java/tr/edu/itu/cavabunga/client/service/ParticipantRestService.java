@@ -1,43 +1,37 @@
 package tr.edu.itu.cavabunga.client.service;
 
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.RestTemplate;
 import tr.edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
-import tr.edu.itu.cavabunga.client.http.HttpAdapter;
-import tr.edu.itu.cavabunga.client.http.JsonObjectMapper;
 import tr.edu.itu.cavabunga.lib.entity.Participant;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMethod;
+import tr.edu.itu.cavabunga.lib.http.ParticipantResponse;
+import tr.edu.itu.cavabunga.lib.http.Response;
 
 import java.util.List;
 
 @Data
 @Service
 public class ParticipantRestService {
-
-    private HttpAdapter httpAdapter;
-    private JsonObjectMapper jsonObjectMapper;
     private CavabungaClientConfiguration cavabungaClientConfiguration;
+    private RestTemplateBuilder restTemplateBuilder;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public ParticipantRestService(HttpAdapter httpAdapter,
-                                  JsonObjectMapper jsonObjectMapper,
-                                  CavabungaClientConfiguration cavabungaClientConfiguration){
+    public ParticipantRestService(CavabungaClientConfiguration cavabungaClientConfiguration,
+                                  RestTemplateBuilder restTemplateBuilder){
         this.cavabungaClientConfiguration = cavabungaClientConfiguration;
-        this.jsonObjectMapper = jsonObjectMapper;
-        this.cavabungaClientConfiguration = cavabungaClientConfiguration;
+        this.restTemplateBuilder = restTemplateBuilder;
+        this.restTemplate = restTemplateBuilder.build();
     }
 
-    public String sendParticipantToServer(Participant participant,
-                                        RequestMethod requestMethod,
-                                        String apiUri){
-        return this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
-                requestMethod,
-                this.jsonObjectMapper.mapParticipantToJson(participant));
+    public void postParticipantToServer(Participant participant, String apiUri){
+        this.restTemplate.postForEntity(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri, participant, Response.class);
     }
 
-    public List<Participant> recieveParticipantFromServer(String apiUri, RequestMethod requestMethod){
-        return this.jsonObjectMapper.mapFromJsonToParticipantResponseList( this.httpAdapter.doRequest(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
-                requestMethod, ""));
+    public List<Participant> getParticipantFromServer(String apiUri){
+        return this.restTemplate.getForEntity(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,ParticipantResponse.class).getBody().getData();
     }
 }
