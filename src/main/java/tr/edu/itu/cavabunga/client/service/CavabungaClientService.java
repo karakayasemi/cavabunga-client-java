@@ -37,6 +37,7 @@ public class CavabungaClientService {
         this.parameterRestService = parameterRestService;
         this.participantRestService = participantRestService;
         this.propertyRestService = propertyRestService;
+        this.cavabungaClientConfiguration = cavabungaClientConfiguration;
     }
 
     public List<Participant> retrieveParticipant(String userName){
