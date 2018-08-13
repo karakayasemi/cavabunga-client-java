@@ -14,6 +14,7 @@ public class CavabungaClientConfiguration {
     private String cavabungaServerPort;
     private String cavabungaServerAccessToken;
     private String cavabungaServerVersion;
+    private String cavabungaTokenHeaderName;
 
     @Autowired
     public CavabungaClientConfiguration(Environment env){
@@ -22,5 +23,6 @@ public class CavabungaClientConfiguration {
         cavabungaServerPort = this.env.getProperty("cavabunga.server.port");
         cavabungaServerAccessToken = this.env.getProperty("cavabunga.server.access.token");
         cavabungaServerVersion = this.env.getProperty("cavabunga.server.version");
+        cavabungaTokenHeaderName = this.env.getProperty("cavabunga.server.tokenheadername");
     }
 }

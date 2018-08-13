@@ -1,6 +1,9 @@
 package tr.edu.itu.cavabunga.client.service;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import tr.edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
 import lombok.Data;
@@ -27,13 +30,19 @@ public class ComponentRestService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public void postComponentToServer(tr.edu.itu.cavabunga.lib.entity.Component component, String apiUri){
-        this.restTemplate.postForEntity(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
-                component, Response.class);
+    public void postComponentToServer(tr.edu.itu.cavabunga.lib.entity.Component component, String apiUri, HttpHeaders httpHeaders){
+        this.restTemplate.exchange(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+                HttpMethod.POST,
+                new HttpEntity<>(httpHeaders),
+                Response.class ,
+                component).getBody();
     }
 
-    public List<Component> getComponentFromServer(String apiUri){
-        return this.restTemplate.getForEntity(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,ComponentResponse.class).getBody().getData();
+    public List<Component> getComponentFromServer(String apiUri, HttpHeaders httpHeaders){
+        return this.restTemplate.exchange(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+                HttpMethod.GET,
+                new HttpEntity<>(httpHeaders),
+                ComponentResponse.class).getBody().getData();
     }
 
 }

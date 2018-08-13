@@ -1,6 +1,9 @@
 package tr.edu.itu.cavabunga.client.service;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import tr.edu.itu.cavabunga.client.configuration.CavabungaClientConfiguration;
 import tr.edu.itu.cavabunga.lib.entity.Participant;
@@ -27,11 +30,18 @@ public class ParticipantRestService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
-    public void postParticipantToServer(Participant participant, String apiUri){
-        this.restTemplate.postForEntity(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri, participant, Response.class);
+    public void postParticipantToServer(Participant participant, String apiUri, HttpHeaders httpHeaders){
+        this.restTemplate.exchange(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+                HttpMethod.POST,
+                new HttpEntity<>(httpHeaders),
+                Response.class,
+                participant);
     }
 
-    public List<Participant> getParticipantFromServer(String apiUri){
-        return this.restTemplate.getForEntity(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,ParticipantResponse.class).getBody().getData();
+    public List<Participant> getParticipantFromServer(String apiUri, HttpHeaders httpHeaders){
+        return this.restTemplate.exchange(this.cavabungaClientConfiguration.getCavabungaServerUrl() + ":" + this.cavabungaClientConfiguration.getCavabungaServerPort() + "/" + apiUri,
+                HttpMethod.GET,
+                new HttpEntity<>(httpHeaders),
+                ParticipantResponse.class).getBody().getData();
     }
 }
